@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../model/product/product';
-// import { ngForm } from '@angular/forms';
+import { Product } from '../class/product/product';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { InventoryService } from '../service/inventory.service';
 
 @Component({
 	selector: 'app-adminview',
@@ -11,21 +13,18 @@ export class AdminviewComponent implements OnInit {
 
 	product: Product;
 
-	constructor() { }
+	constructor(private http: HttpClient, private router: Router, private inventoryService: InventoryService) { }
 
 	ngOnInit(): void {
 		this.product = new Product();
 	}
 
-	title: "Admin View";
-
-	submitItem() {
+	addItem() {
 		console.log("submitItem() clicked.");
 
 		// Sanity check
 		console.log(this.product);
 
-		
+		this.inventoryService.addProduct(this.product).subscribe(data => this.router.navigate(['/inventoryview']));
 	}
-
 }

@@ -1,0 +1,22 @@
+<p class="display-4">Current inventory to be displayed here.</p>
+
+<br>
+
+<div *ngFor="let product of products">
+	<div class="container card">
+		<p>Name: {{product.name}}</p>
+		<p>Description: {{product.description}}</p>
+		<p>Manufacturer ID: {{product.manufacturerID}}</p>
+		<p>Model: {{product.model}}</p>
+		<p>Category ID: {{product.categoryID}}</p>
+		<img src="{{product.image}}" width="50%">
+		<p>Quantity: {{product.quantity}}</p>
+		<p>Unit Price: {{product.unitPrice}}</p>
+		<p>Color: {{product.color}}</p>
+
+		<button type="button" class="btn btn-warning" (click)=updateItem(product)>Update</button>
+		<button type="button" class="btn btn-danger" (click)=deleteItem(product)>Delete</button>
+	</div>
+</div>
+
+<!-- <p>{{products | json}}</p> -->

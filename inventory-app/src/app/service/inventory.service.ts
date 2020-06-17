@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Product } from '../model/product/product';
+import { Product } from '../class/product/product';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,23 +8,35 @@ import { Observable } from 'rxjs';
 })
 export class InventoryService {
 
-	baseUrl = "http://localhost:8989/";
+	baseUrl: string = "http://localhost:8989/";
+
+	options: {
+
+	}
 
 	constructor(private http: HttpClient) { }
 
+	// CREATE
 	addProduct(product: Product): Observable<Product> {
-		return this.http.post<Product>(this.baseUrl, product);
+		return this.http.post<Product>(this.baseUrl + "product", product); // http://localhost:8989/product
 	}
 
-	getAllProducts(): Observable<Product> {
-		return this.http.get<Product>(this.baseUrl);
+	// READ
+	getAllProducts(): Observable<Product[]> {
+		return this.http.get<Product[]>(this.baseUrl + "product"); // http://localhost:8989/product
 	}
 
 	getProductById(id: number): Observable<Product> {
 		return this.http.get<Product>(this.baseUrl + "product/" + id); // http://localhost:8989/product/{id}
 	}
 
-	deleteProduct() {
+	// UPDATE
+	public updateProduct(product: Product) {
+		return this.http.put<Product>(this.baseUrl + "product", event); // http://localhost:8989/product
+	}
 
+	// DELETE
+	deleteProductById(id: number): Observable<Product> {
+		return this.http.delete<Product>(this.baseUrl + "product/" + id); // http://localhost:8989/product/{id}
 	}
 }

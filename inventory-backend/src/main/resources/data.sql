@@ -1,2 +1,0 @@
-insert into product(id, category_id, manufacturer_id, name, description, model, image, quantity, unit_price, color) values (1001,  501, 201, 'Wireless Headphone', 'Over-Ear Wireless Headphone', 'BX300', 'www.wireless.image.com', 30,  299.50, 'Black' );
-insert into product(id, category_id, manufacturer_id, name, description, model, image, quantity, unit_price, color) values (1002,  501, 201, 'Wired Headphone', 'Over-Ear Wired Headphone', 'AX100', 'www.wired.image.com', 25,  99.50, 'Blue' );
