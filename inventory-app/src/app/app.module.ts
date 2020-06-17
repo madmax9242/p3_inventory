@@ -10,20 +10,15 @@ import { AdminviewComponent } from './adminview/adminview.component';
 import { InventoryviewComponent } from './inventoryview/inventoryview.component';
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		AdminviewComponent,
-		InventoryviewComponent
-	],
-	imports: [
-		BrowserModule,
-		HttpClientModule,
-		AppRoutingModule,
-		FormsModule,
-		NgbModule
-	],
-	providers: [],
-	bootstrap: [AppComponent]
+  declarations: [AppComponent, AdminviewComponent, InventoryviewComponent],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
+    NgbModule,
+  ],
+  providers: [HttpClientModule],
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
