@@ -1,6 +1,8 @@
 <div class="container">
-	<form #f="ngForm" (submit)="submitItem()">
+	<form #f="ngForm" (submit)="addItem()">
 		<!-- INPUT FIELDS -->
+		<p class="display-4">Item Inventory Item</p>
+
 		<div class="form-group">
 			<label for="inputName">Name</label>
 			<input type="text" class="form-control" id="inputName" name="name" [(ngModel)]="product.name">
@@ -10,16 +12,16 @@
 			<input type="text" class="form-control" id="inputDescription" name="description" [(ngModel)]="product.description">
 		</div>
 		<div class="form-group">
-			<label for="inputManufacturerID">ManufacturerID</label>
-			<input type="text" class="form-control" id="inputManufacturerID" name="manufacturerID" [(ngModel)]="product.manufacturerID">
+			<label for="inputManufacturerID">Manufacturer ID</label>
+			<input type="number" class="form-control" id="inputManufacturerID" name="manufacturerID" [(ngModel)]="product.manufacturerID">
 		</div>
 		<div class="form-group">
 			<label for="inputModel">Model</label>
 			<input type="text" class="form-control" id="inputModel" name="model" [(ngModel)]="product.model">
 		</div>
 		<div class="form-group">
-			<label for="inputCategoryID">CategoryID</label>
-			<input type="text" class="form-control" id="inputCategoryID" name="categoryID" [(ngModel)]="product.categoryID">
+			<label for="inputCategoryID">Category ID</label>
+			<input type="number" class="form-control" id="inputCategoryID" name="categoryID" [(ngModel)]="product.categoryID">
 		</div>
 		<div class="form-group">
 			<label for="inputImage">Image</label>
@@ -27,11 +29,11 @@
 		</div>
 		<div class="form-group">
 			<label for="inputQuantity">Quantity</label>
-			<input type="text" class="form-control" id="inputQuantity" name="quantity" [(ngModel)]="product.quantity">
+			<input type="number" class="form-control" id="inputQuantity" name="quantity" [(ngModel)]="product.quantity">
 		</div>
 		<div class="form-group">
 			<label for="inputUnitPrice">Unit Price</label>
-			<input type="text" class="form-control" id="inputUnitPrice" name="unitPrice" [(ngModel)]="product.unitPrice">
+			<input type="number" class="form-control" id="inputUnitPrice" name="unitPrice" [(ngModel)]="product.unitPrice">
 		</div>
 		<div class="form-group">
 			<label for="inputColor">Color</label>
@@ -39,6 +41,9 @@
 		</div>
 
 		<!-- BUTTON -->
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<div class="container">
+			<button type="submit" class="btn btn-success col-6">Submit</button>
+			<button type="reset" class="btn btn-warning col-6">Reset</button>
+		</div>
 	</form>
 </div>

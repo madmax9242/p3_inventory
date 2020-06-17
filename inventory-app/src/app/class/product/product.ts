@@ -1,5 +1,6 @@
 export class Product {
 
+	id: number;
 	name: string;
 	description: string;
 	manufacturerID: number;
@@ -7,7 +8,7 @@ export class Product {
 	categoryID: number;
 	image: string;
 	quantity: number;
-	unitPrice: string;
+	unitPrice: number;
 	color: string;
 
 }

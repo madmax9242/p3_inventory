@@ -7,11 +7,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { AdminviewComponent } from './adminview/adminview.component';
+import { InventoryviewComponent } from './inventoryview/inventoryview.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		AdminviewComponent
+		AdminviewComponent,
+		InventoryviewComponent
 	],
 	imports: [
 		BrowserModule,
@@ -23,4 +25,5 @@ import { AdminviewComponent } from './adminview/adminview.component';
 	providers: [],
 	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
