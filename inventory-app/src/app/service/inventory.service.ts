@@ -10,10 +10,6 @@ export class InventoryService {
 
 	baseUrl: string = "http://localhost:8989/";
 
-	options: {
-
-	}
-
 	constructor(private http: HttpClient) { }
 
 	// CREATE
