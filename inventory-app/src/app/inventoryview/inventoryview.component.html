@@ -4,18 +4,88 @@
 
 <div *ngFor="let product of products">
 	<div class="container card">
-		<p>Name: {{product.name}}</p>
-		<p>Description: {{product.description}}</p>
-		<p>Manufacturer ID: {{product.manufacturerID}}</p>
-		<p>Model: {{product.model}}</p>
-		<p>Category ID: {{product.categoryID}}</p>
-		<img src="{{product.image}}" width="50%">
-		<p>Quantity: {{product.quantity}}</p>
-		<p>Unit Price: {{product.unitPrice}}</p>
-		<p>Color: {{product.color}}</p>
+		<p>Name: 
+			<input type="text" class="form-control" id="inputName" name="name" [(ngModel)]="product.name">
+		</p>
+		<p>Description:
+			<input type="text" class="form-control" id="inputDescription" name="description" [(ngModel)]="product.description">
+		</p>
+		<p>Manufacturer ID:
+			<input type="number" class="form-control" id="inputManufacturerID" name="manufacturerID" [(ngModel)]="product.manufacturerID">
+		</p>
+		<p>Model:
+			<input type="text" class="form-control" id="inputModel" name="model" [(ngModel)]="product.model">
+		</p>
+		<p>Category ID:
+			<input type="number" class="form-control" id="inputCategoryID" name="categoryID" [(ngModel)]="product.categoryID">
+		</p>
+		<p><img src="{{product.image}}" width="50%">
+			<input type="text" class="form-control" id="inputImage" name="image" [(ngModel)]="product.image">
+		</p>
+		<p>Quantity:
+			<input type="number" class="form-control" id="inputQuantity" name="quantity" [(ngModel)]="product.quantity">
+		</p>
+		<p>Unit Price:
+			<input type="number" class="form-control" id="inputUnitPrice" name="unitPrice" [(ngModel)]="product.unitPrice">
+		</p>
+		<p>Color:
+			<input type="text" class="form-control" id="inputColor" name="color" [(ngModel)]="product.color">
+		</p>
 
 		<button type="button" class="btn btn-warning" (click)=updateItem(product)>Update</button>
 		<button type="button" class="btn btn-danger" (click)=deleteItem(product)>Delete</button>
+		
+		<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Name: 
+			<input type="text" class="form-control" id="inputName" name="name" [(ngModel)]="product.name">
+		</p>
+		<p>Description:
+			<input type="text" class="form-control" id="inputDescription" name="description" [(ngModel)]="product.description">
+		</p>
+		<p>Manufacturer ID:
+			<input type="number" class="form-control" id="inputManufacturerID" name="manufacturerID" [(ngModel)]="product.manufacturerID">
+		</p>
+		<p>Model:
+			<input type="text" class="form-control" id="inputModel" name="model" [(ngModel)]="product.model">
+		</p>
+		<p>Category ID:
+			<input type="number" class="form-control" id="inputCategoryID" name="categoryID" [(ngModel)]="product.categoryID">
+		</p>
+		<p><img src="{{product.image}}" width="50%">
+			<input type="text" class="form-control" id="inputImage" name="image" [(ngModel)]="product.image">
+		</p>
+		<p>Quantity:
+			<input type="number" class="form-control" id="inputQuantity" name="quantity" [(ngModel)]="product.quantity">
+		</p>
+		<p>Unit Price:
+			<input type="number" class="form-control" id="inputUnitPrice" name="unitPrice" [(ngModel)]="product.unitPrice">
+		</p>
+		<p>Color:
+			<input type="text" class="form-control" id="inputColor" name="color" [(ngModel)]="product.color">
+		</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 	</div>
 </div>
 
