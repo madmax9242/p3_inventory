@@ -10,10 +10,6 @@ export class InventoryService {
 
 	baseUrl: string = "http://localhost:8989/";
 
-	options: {
-
-	}
-
 	constructor(private http: HttpClient) { }
 
 	// CREATE
@@ -32,7 +28,7 @@ export class InventoryService {
 
 	// UPDATE
 	public updateProduct(product: Product) {
-		return this.http.put<Product>(this.baseUrl + "product", event); // http://localhost:8989/product
+		return this.http.put<Product>(this.baseUrl + "product", product); // http://localhost:8989/product
 	}
 
 	// DELETE

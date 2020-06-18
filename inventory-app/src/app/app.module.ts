@@ -8,9 +8,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { AdminviewComponent } from './adminview/adminview.component';
 import { InventoryviewComponent } from './inventoryview/inventoryview.component';
+import { InventoryItemComponent } from './inventory-item/inventory-item.component';
 
 @NgModule({
-  declarations: [AppComponent, AdminviewComponent, InventoryviewComponent],
+  declarations: [
+    AppComponent,
+    AdminviewComponent,
+    InventoryviewComponent,
+    InventoryItemComponent,
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,

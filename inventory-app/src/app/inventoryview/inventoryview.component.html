@@ -1,22 +1,11 @@
-<p class="display-4">Current inventory to be displayed here.</p>
-
-<br>
-
-<div *ngFor="let product of products">
-	<div class="container card">
-		<p>Name: {{product.name}}</p>
-		<p>Description: {{product.description}}</p>
-		<p>Manufacturer ID: {{product.manufacturerID}}</p>
-		<p>Model: {{product.model}}</p>
-		<p>Category ID: {{product.categoryID}}</p>
-		<img src="{{product.image}}" width="50%">
-		<p>Quantity: {{product.quantity}}</p>
-		<p>Unit Price: {{product.unitPrice}}</p>
-		<p>Color: {{product.color}}</p>
-
-		<button type="button" class="btn btn-warning" (click)=updateItem(product)>Update</button>
-		<button type="button" class="btn btn-danger" (click)=deleteItem(product)>Delete</button>
+<div class="container">
+	<div class="jumbotron" style="background-color: #FFF">
+		<p class="display-4 text-center" style="color: #474C55">Current Inventory</p>
 	</div>
 </div>
 
-<!-- <p>{{products | json}}</p> -->
+<div class="container">
+	<div *ngFor="let product of products" class="card rounded shadow my-4 p-4">
+		<app-inventory-item [product]="product" (updateEvent)="receiveUpdate($event)" (deleteEvent)="receiveDelete($event)"></app-inventory-item>
+	</div>
+</div>
