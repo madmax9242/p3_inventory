@@ -31,7 +31,6 @@ export class InventoryviewComponent implements OnInit {
 	}
 
 	updateItem(product: Product) {
-		this.inventoryService.updateProduct(product).subscribe(res => {this.router.navigate(['/adminview']);})
-		
+		this.inventoryService.updateProduct(product).subscribe(res => window.location.reload());
 	}
 }
