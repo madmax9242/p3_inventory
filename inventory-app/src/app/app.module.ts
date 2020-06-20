@@ -3,12 +3,14 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { AdminviewComponent } from './adminview/adminview.component';
 import { InventoryviewComponent } from './inventoryview/inventoryview.component';
 import { InventoryItemComponent } from './inventory-item/inventory-item.component';
+import { SortableDirective } from './directives/sortable.directive';
+import { DecimalPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { InventoryItemComponent } from './inventory-item/inventory-item.componen
     AdminviewComponent,
     InventoryviewComponent,
     InventoryItemComponent,
+    SortableDirective,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +27,7 @@ import { InventoryItemComponent } from './inventory-item/inventory-item.componen
     FormsModule,
     NgbModule,
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule, DecimalPipe, NgbActiveModal],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

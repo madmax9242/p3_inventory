@@ -1,6 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../class/product/product';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ServiceService } from '../service/service.service';
+import { InventoryService } from '../service/inventory.service';
 
 @Component({
 	selector: 'app-inventory-item',
@@ -11,37 +13,28 @@ export class InventoryItemComponent implements OnInit {
 
 	@Input() product: Product;
 
-	@Output() updateEvent = new EventEmitter<Product>();
-
-	@Output() deleteEvent = new EventEmitter<Product>();
-
-	closeResult = '';
-
-	constructor(private modalService: NgbModal) { }
+	constructor(
+		private modalService: NgbModal,
+		public service: ServiceService,
+		public activeModal: NgbActiveModal,
+		private inventoryService: InventoryService) {
+	}
 
 	ngOnInit(): void { }
 
 	updateItem() {
-		this.updateEvent.emit(this.product);
-
 		// TODO: BACKEND VALIDATION; MAKE SURE UPDATED FIELDS ARE VALID
-	}
-
-	deleteItem() {
-		this.deleteEvent.emit(this.product);
-	}
-
-	open(itemModal) {
-		this.modalService
-			.open(itemModal, { ariaLabelledBy: 'modal-basic-title' })
-			.result.then(
-				(result) => {
-					this.closeResult = `Closed with: ${result}`;
-				},
-				(reason) => {
-					this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+		this.inventoryService
+			.updateProduct(this.product)
+			.subscribe((res) => {
+				if (res) {
+					this.inventoryService.getAllProducts()
+						.subscribe(inventory => {
+							this.service.setInventory(inventory);
+							this.modalService.dismissAll();
+						})
 				}
-			);
+			});
 	}
 
 	private getDismissReason(reason: any): string {
