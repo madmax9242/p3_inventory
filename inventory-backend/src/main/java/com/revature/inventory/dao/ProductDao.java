@@ -16,5 +16,5 @@ import com.revature.inventory.model.Product;
 public interface ProductDao extends JpaRepository<Product, Long>{
 
 	
-
+	
 }
