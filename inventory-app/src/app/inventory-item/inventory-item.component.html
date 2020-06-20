@@ -1,65 +1,53 @@
-<div class="container row align-items-center">
-	<div class="col-4">
-		<img class="container card-img-top" src="{{product.image}}" alt="alt bc best practice">
-	</div>
-	<div class="col-8">
-		<div class="container card-body">
-			<p class="card-title">Name: {{product.name}}</p>
-			<p class="card-text">Description: {{product.description}}</p>
-			<p class="card-text">Manufacturer ID: {{product.manufacturerID}}</p>
-			<p class="card-text">Model: {{product.model}}</p>
-			<p class="card-text">Category ID: {{product.categoryID}}</p>
-			<p class="card-text">Quantity: {{product.quantity}}</p>
-			<p class="card-text">Unit Price: {{product.unitPrice}}</p>
-			<p class="card-text">Color: {{product.color}}</p>
-
-			<button class="btn btn-warning btn-block" (click)="open(itemModal)">Update</button>
-			<button type="button" class="btn btn-danger btn-block" (click)="deleteItem()">Delete</button>
-		</div>
-	</div>
+<div class="modal-header">
+	<h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+	<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+		<span aria-hidden="true">&times;</span>
+	</button>
 </div>
-
-<ng-template #itemModal let-modal>
-	<div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-			<span aria-hidden="true">&times;</span>
-		</button>
-	</div>
-	<div class="modal-body">
-		<form>
-			<p>Name:
-				<input type="text" class="form-control" id="inputName" name="name" [(ngModel)]="product.name">
-			</p>
-			<p>Description:
-				<input type="text" class="form-control" id="inputDescription" name="description" [(ngModel)]="product.description">
-			</p>
-			<p>Manufacturer ID:
-				<input type="number" class="form-control" id="inputManufacturerID" name="manufacturerID" [(ngModel)]="product.manufacturerID">
-			</p>
-			<p>Model:
-				<input type="text" class="form-control" id="inputModel" name="model" [(ngModel)]="product.model">
-			</p>
-			<p>Category ID:
-				<input type="number" class="form-control" id="inputCategoryID" name="categoryID" [(ngModel)]="product.categoryID">
-			</p>
-			<p><img src="{{product.image}}" width="100%">
-				<input type="text" class="form-control" id="inputImage" name="image" [(ngModel)]="product.image">
-			</p>
-			<p>Quantity:
-				<input type="number" class="form-control" id="inputQuantity" name="quantity" [(ngModel)]="product.quantity">
-			</p>
-			<p>Unit Price:
-				<input type="number" class="form-control" id="inputUnitPrice" name="unitPrice" [(ngModel)]="product.unitPrice">
-			</p>
-			<p>Color:
-				<input type="text" class="form-control" id="inputColor" name="color" [(ngModel)]="product.color">
-			</p>
-		</form>
-
-		<div class="modal-footer">
-			<button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('Cross click')">Cancel</button>
-			<button type="button" class="btn btn-outline-success" (click)="updateItem(); modal.close()">Save</button>
+<div class="modal-body">
+	<form (submit)="updateItem()" #updateForm="ngForm">
+		<div>* Name:
+			<input type="text" class="form-control" id="inputName" name="name" [(ngModel)]="product.name"
+				#name="ngModel" required>
+			<p class="text-danger small-text" [hidden]="name.valid || name.pristine">Name is required</p>
 		</div>
-	</div>
-</ng-template>
+		<p>Description:
+			<input type="text" class="form-control" id="inputDescription" name="description"
+				[(ngModel)]="product.description">
+		</p>
+		<p>Brand:
+			<input type="number" class="form-control" id="brand" name="brand" [(ngModel)]="product.brand">
+		</p>
+		<p>Model:
+			<input type="text" class="form-control" id="inputModel" name="model" [(ngModel)]="product.model">
+		</p>
+		<p>Category:
+			<input type="number" class="form-control" id="category" name="category" [(ngModel)]="product.category">
+		</p>
+		<p>
+			<img src="{{product.image}}" width="100%" alt="product_img">
+			<input type="text" class="form-control" id="inputImage" name="image" [(ngModel)]="product.image">
+		</p>
+		<div>* Quantity:
+			<input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="product.quantity"
+				#quantity="ngModel" required min="0" pattern="([0-9]+)">
+			<p class="text-danger small-text" [hidden]="quantity.valid || quantity.pristine">Quantity is required
+			</p>
+		</div>
+		<div>* Unit Price:
+			<input type="number" class="form-control" id="unitPrice" name="unitPrice" [(ngModel)]="product.unitPrice"
+				#unitPrice="ngModel" min="0" pattern="([0-9]+)">
+			<p class="text-danger small-text" [hidden]="unitPrice.valid || unitPrice.pristine">Unit Price is
+				required
+			</p>
+		</div>
+		<p>Color:
+			<input type="text" class="form-control" id="inputColor" name="color" [(ngModel)]="product.color">
+		</p>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-outline-danger"
+				(click)="activeModal.dismiss('Cross click')">Cancel</button>
+			<button type="submit" class="btn btn-outline-success" [disabled]="!updateForm.form.valid">Save</button>
+		</div>
+	</form>
+</div>

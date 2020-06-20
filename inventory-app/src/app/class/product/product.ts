@@ -3,9 +3,9 @@ export class Product {
 	id: number;
 	name: string;
 	description: string;
-	manufacturerID: number;
+	brand: string;
 	model: string;
-	categoryID: number;
+	category: string;
 	image: string;
 	quantity: number;
 	unitPrice: number;

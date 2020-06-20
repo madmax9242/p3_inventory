@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Product } from '../class/product/product';
 import { InventoryService } from '../service/inventory.service';
-import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { SortableDirective, SortEvent } from '../directives/sortable.directive';
+import { ServiceService } from '../service/service.service';
 
-declare var $: any;
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { InventoryItemComponent } from '../inventory-item/inventory-item.component';
 
 @Component({
 	selector: 'app-inventoryview',
@@ -12,38 +15,86 @@ declare var $: any;
 	styleUrls: ['./inventoryview.component.css'],
 })
 export class InventoryviewComponent implements OnInit {
-	products: Product[];
+
+	// products: Product[];
+
+	products$: Observable<Product[]>;
+	total$: Observable<number>;
+
+	@ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
 
 	constructor(
 		private inventoryService: InventoryService,
-		private router: Router
-	) { }
+		private router: Router,
+		public service: ServiceService,
+		private modalService: NgbModal,
+	) {
+		this.getAllProducts();
+	}
+
+	open(product) {
+		const modalRef = this.modalService.open(InventoryItemComponent);
+		modalRef.componentInstance.product = product;
+		// this.modalService
+		// 	.open(itemModal, { ariaLabelledBy: 'modal-basic-title' })
+		// 	.result.then(
+		// 		(result) => {
+		// 			this.closeResult = `Closed with: ${result}`;
+		// 		},
+		// 		(reason) => {
+		// 			this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+		// 		}
+		// 	);
+	}
+
+	onSort({ column, direction }: SortEvent) {
+		// resetting other headers
+		this.headers.forEach(header => {
+			if (header.sortable !== column) {
+				header.direction = '';
+			}
+		});
+
+		this.service.sortColumn = column;
+		this.service.sortDirection = direction;
+	}
 
 	ngOnInit(): void {
-		this.inventoryService
-			.getAllProducts()
-			.subscribe((data) => (this.products = data));
+		// this.inventoryService
+		// 	.getAllProducts()
+		// 	.subscribe((data) => {
+		// 		this.products = data;
+		// 	});
 	}
 
 	deleteItem(product: Product) {
-		console.log('deleteItem() clicked.');
-		console.log("Indicex's ID: " + product.id);
-
 		this.inventoryService
 			.deleteProductById(product.id)
-			.subscribe(() => this.getAllProducts());
+			.subscribe((result) => {
+				if (!result) {
+					this.getAllProducts();
+				} else {
+					console.log('show something');
+				}
+
+			});
 	}
 
 	updateItem(product: Product) {
-		this.inventoryService
-			.updateProduct(product)
-			.subscribe((res) => console.log(res));
+		console.log(product);
+		// this.inventoryService
+		// 	.updateProduct(product)
+		// 	.subscribe((res) => console.log(res));
 	}
 
 	getAllProducts() {
-		this.inventoryService
-			.getAllProducts()
-			.subscribe((data) => (this.products = data));
+		this.inventoryService.getAllProducts()
+			.subscribe(result => {
+				console.log(result);
+				this.service.setInventory(result);
+				this.products$ = this.service.products$;
+				this.total$ = this.service.total$;
+			})
 	}
 
 	receiveUpdate($event) {

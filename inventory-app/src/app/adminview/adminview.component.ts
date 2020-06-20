@@ -25,6 +25,9 @@ export class AdminviewComponent implements OnInit {
 		// Sanity check
 		console.log(this.product);
 
-		this.inventoryService.addProduct(this.product).subscribe(data => this.router.navigate(['/inventoryview']));
+		this.inventoryService.addProduct(this.product).subscribe(data => {
+			window.location.href = '/inventoryview';
+			// this.router.navigate(['/inventoryview']
+		});
 	}
 }
