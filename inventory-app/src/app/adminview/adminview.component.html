@@ -1,18 +1,23 @@
-<div class="container shadow my-4 p-4">
+<div class="container col-6 shadow my-4 p-4">
 	<form #f="ngForm" (submit)="addItem()">
+
+		<br>
+		<br>
+
 		<!-- INPUT FIELDS -->
-		<p class="display-4 text-center">Add Item to Inventory</p>
+		<p class="display-4 text-center">Add to Inventory</p>
+
+		<br>
+		<br>
 
 		<div class="form-group">
 			<label for="inputName">Name</label>
-			<input type="text" class="form-control" id="name" name="name" [(ngModel)]="product.name" #name="ngModel"
-				required minlength="3">
+			<input type="text" class="form-control" id="name" name="name" [(ngModel)]="product.name" #name="ngModel" required minlength="3">
 			<p class="text-danger small-text" [hidden]="name.valid || name.pristine">Name is required</p>
 		</div>
 		<div class="form-group">
 			<label for="inputDescription">Description</label>
-			<input type="text" class="form-control" id="inputDescription" name="description"
-				[(ngModel)]="product.description">
+			<input type="text" class="form-control" id="inputDescription" name="description" [(ngModel)]="product.description">
 		</div>
 		<div class="form-group">
 			<label for="brand">Brand</label>
@@ -32,27 +37,26 @@
 		</div>
 		<div class="form-group">
 			<label for="inputQuantity">Quantity</label>
-			<input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="product.quantity"
-				#quantity="ngModel" required min="0" pattern="([0-9]+)">
+			<input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="product.quantity" #quantity="ngModel" required min="0" pattern="([0-9]+)">
 			<p class="text-danger small-text" [hidden]="quantity.valid || quantity.pristine">Quantity is required</p>
 		</div>
 		<div class="form-group">
 			<label for="inputUnitPrice">Unit Price</label>
-			<input type="number" class="form-control" id="unitPrice" name="unitPrice" [(ngModel)]="product.unitPrice"
-				required min="0" #unitPrice="ngModel" pattern="([0-9]+)">
-			<p class="text-danger small-text" [hidden]="unitPrice.valid || unitPrice.pristine">
-				Unit Price is required
-			</p>
+			<input type="number" class="form-control" id="unitPrice" name="unitPrice" [(ngModel)]="product.unitPrice" required min="0" #unitPrice="ngModel" pattern="([0-9]+)">
+			<p class="text-danger small-text" [hidden]="unitPrice.valid || unitPrice.pristine">Unit price is required</p>
 		</div>
 		<div class="form-group">
 			<label for="inputColor">Color</label>
 			<input type="text" class="form-control" id="inputColor" name="color" [(ngModel)]="product.color">
 		</div>
 
-		<!-- BUTTON -->
-		<div class="container mt-4">
-			<button type="submit" class="btn btn-success col-6" [disabled]="!f.form.valid">Submit</button>
-			<button type="reset" class="btn btn-warning col-6">Reset</button>
+		<br>
+		<br>
+
+		<!-- BUTTONS -->
+		<div class="container mx-auto">
+			<button type="submit" class="btn btn-success btn-block" [disabled]="!f.form.valid">Submit</button>
+			<button type="reset" class="btn btn-warning btn-block">Reset</button>
 		</div>
 	</form>
 </div>

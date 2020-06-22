@@ -1,17 +1,18 @@
 <div class="container">
 	<div class="jumbotron" style="background-color: #FFF">
-		<p class="display-4 text-center" style="color: #474C55">Current Inventory</p>
+		<p class="display-4 text-center" style="color: #474C55">Inventory</p>
 	</div>
 </div>
 
-<div class="container">
+<div class="container shadow m-4 p-4">
 	<form>
+		<!-- PRODUCT SEARCH -->
 		<div class="form-group form-inline">
-			Product search: <input class="form-control ml-2" type="text" name="searchTerm"
-				[(ngModel)]="service.searchTerm" />
+			Product Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm" />
 			<span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
 		</div>
 
+		<!-- TABLE -->
 		<table class="table table-striped table-sm table-responsive-md">
 			<caption>List of Products</caption>
 			<thead class="thead-dark">
@@ -37,8 +38,7 @@
 						<ngb-highlight [result]="product.id" [term]="service.searchTerm"></ngb-highlight>
 					</td>
 					<td>
-						<img class="media-img rounded d-block mr-4 ml-4" src="{{product.image}}"
-							alt="alt bc best practice">
+						<img class="media-img rounded d-block mr-4 ml-4" src="{{product.image}}" alt="alt bc best practice">
 					</td>
 					<td>
 						<ngb-highlight [result]="product.name" [term]="service.searchTerm"></ngb-highlight>
@@ -47,12 +47,10 @@
 						<ngb-highlight [result]="product.description" [term]="service.searchTerm"></ngb-highlight>
 					</td>
 					<td>
-						<ngb-highlight [result]="product.quantity | number" [term]="service.searchTerm">
-						</ngb-highlight>
+						<ngb-highlight [result]="product.quantity | number" [term]="service.searchTerm"></ngb-highlight>
 					</td>
 					<td>
-						<ngb-highlight [result]="product.price | number" [term]="service.searchTerm">
-						</ngb-highlight>
+						<ngb-highlight [result]="product.unitPrice | currency" [term]="service.searchTerm"></ngb-highlight>
 					</td>
 					<td>
 						<ngb-highlight [result]="product.brand" [term]="service.searchTerm"></ngb-highlight>
@@ -66,15 +64,25 @@
 					<td>
 						<ngb-highlight [result]="product.color" [term]="service.searchTerm"></ngb-highlight>
 					</td>
+
+					<!-- BUTTONS -->
 					<td>
-						<button class="btn btn-warning btn-block" (click)="open(product)">Update</button>
-						<button type="button" class="btn btn-danger btn-block"
-							(click)="deleteItem(product)">Delete</button>
+						<!-- SHOW IF ADMIN -->
+						<ng-container *ngIf="userType === 'admin'">
+							<button class="btn btn-warning btn-block" (click)="open(product)">Update</button>
+							<button type="button" class="btn btn-danger btn-block" (click)="deleteItem(product)">Delete</button>
+						</ng-container>
+
+						<!-- SHOW IF CUSTOMER -->
+						<ng-container *ngIf="userType === 'customer'">
+							<button class="btn btn-warning btn-block" (click)="open(product)">Add to Cart</button>
+						</ng-container>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 
+		<!-- PAGINATION -->
 		<div class="d-flex justify-content-between p-2">
 			<ngb-pagination [collectionSize]="(total$ | async)!" [(page)]="service.page" [pageSize]="service.pageSize">
 			</ngb-pagination>
@@ -85,6 +93,5 @@
 				<option [ngValue]="6">6 items per page</option>
 			</select>
 		</div>
-
 	</form>
 </div>

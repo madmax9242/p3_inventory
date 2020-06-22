@@ -20,14 +20,12 @@ export class AdminviewComponent implements OnInit {
 	}
 
 	addItem() {
-		console.log("submitItem() clicked.");
+		console.log("submitItem() called.");
 
-		// Sanity check
 		console.log(this.product);
 
 		this.inventoryService.addProduct(this.product).subscribe(data => {
-			window.location.href = '/inventoryview';
-			// this.router.navigate(['/inventoryview']
+			this.router.navigate(['/inventoryview'])
 		});
 	}
 }

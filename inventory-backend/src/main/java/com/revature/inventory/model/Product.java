@@ -1,41 +1,30 @@
 package com.revature.inventory.model;
 
-import java.math.BigDecimal;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-
-import org.hibernate.annotations.Table;
+import javax.persistence.*;
 
 @Entity
-@SequenceGenerator(name="product_seq", initialValue=1101)
+@SequenceGenerator(name = "product_seq", initialValue = 1101)
 public class Product {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="product_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq")
 	private Long id;
 	private String category;
-	private String brand;	
+	private String brand;
 	private String name;
 	private String description;
 	private String model;
 	private String image;
 	private Integer quantity;
-	@Column(name="unit_price")
-	private BigDecimal unitPrice ;
+	@Column(name = "unit_price")
+	private Integer unitPrice;
 	private String color;
-	
+
 	public Product() {
 	}
-	
-
 
 	public Product(Long id, String category, String brand, String name, String description, String model,
-			String image, Integer quantity, BigDecimal unitPrice, String color) {
+				   String image, Integer quantity, Integer unitPrice, String color) {
 		super();
 		this.id = id;
 		this.category = category;
@@ -48,8 +37,6 @@ public class Product {
 		this.unitPrice = unitPrice;
 		this.color = color;
 	}
-
-
 
 	public Long getId() {
 		return id;
@@ -99,11 +86,11 @@ public class Product {
 		this.quantity = quantity;
 	}
 
-	public BigDecimal getUnitPrice() {
+	public Integer getUnitPrice() {
 		return unitPrice;
 	}
 
-	public void setUnitPrice(BigDecimal unitPrice) {
+	public void setUnitPrice(Integer unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 
@@ -114,32 +101,22 @@ public class Product {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	
-	
 
 	public String getCategory() {
 		return category;
 	}
 
-
-
 	public void setCategory(String category) {
 		this.category = category;
 	}
-
-
 
 	public String getBrand() {
 		return brand;
 	}
 
-
-
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
-
-
 
 	@Override
 	public String toString() {
@@ -147,9 +124,4 @@ public class Product {
 				+ name + ", description=" + description + ", model=" + model + ", image=" + image + ", quantity="
 				+ quantity + ", unitPrice=" + unitPrice + ", color=" + color + "]";
 	}
-
-
-
-	
-
 }
