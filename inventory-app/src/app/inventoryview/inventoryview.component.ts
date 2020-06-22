@@ -16,7 +16,8 @@ import { InventoryItemComponent } from '../inventory-item/inventory-item.compone
 })
 export class InventoryviewComponent implements OnInit {
 
-	// products: Product[];
+	// Change application view (admin/customer)
+	userType: string = "admin";
 
 	products$: Observable<Product[]>;
 	total$: Observable<number>;
@@ -32,42 +33,37 @@ export class InventoryviewComponent implements OnInit {
 		this.getAllProducts();
 	}
 
+	ngOnInit(): void {
+	}
+
+	// FOR ADMIN
 	open(product) {
+		console.log("open() called.");
+
 		const modalRef = this.modalService.open(InventoryItemComponent);
 		modalRef.componentInstance.product = product;
-		// this.modalService
-		// 	.open(itemModal, { ariaLabelledBy: 'modal-basic-title' })
-		// 	.result.then(
-		// 		(result) => {
-		// 			this.closeResult = `Closed with: ${result}`;
-		// 		},
-		// 		(reason) => {
-		// 			this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-		// 		}
-		// 	);
+
+		modalRef.componentInstance.userType = this.userType;
+
 	}
 
-	onSort({ column, direction }: SortEvent) {
-		// resetting other headers
-		this.headers.forEach(header => {
-			if (header.sortable !== column) {
-				header.direction = '';
-			}
-		});
+	// FOR CUSTOMER
+	addToCart(product) {
+		console.log("addToCart() called.");
+		console.log(product);
 
-		this.service.sortColumn = column;
-		this.service.sortDirection = direction;
+		// TODO: ADD TO CART, SOMEHOW
 	}
 
-	ngOnInit(): void {
-		// this.inventoryService
-		// 	.getAllProducts()
-		// 	.subscribe((data) => {
-		// 		this.products = data;
-		// 	});
+	updateItem(product: Product) {
+		console.log("updateItem() called.");
+
+		console.log(product);
 	}
 
 	deleteItem(product: Product) {
+		console.log("deleteItem() called.");
+
 		this.inventoryService
 			.deleteProductById(product.id)
 			.subscribe((result) => {
@@ -80,14 +76,9 @@ export class InventoryviewComponent implements OnInit {
 			});
 	}
 
-	updateItem(product: Product) {
-		console.log(product);
-		// this.inventoryService
-		// 	.updateProduct(product)
-		// 	.subscribe((res) => console.log(res));
-	}
-
 	getAllProducts() {
+		console.log("getAllProducts() called.");
+
 		this.inventoryService.getAllProducts()
 			.subscribe(result => {
 				console.log(result);
@@ -97,11 +88,23 @@ export class InventoryviewComponent implements OnInit {
 			})
 	}
 
+	onSort({ column, direction }: SortEvent) {
+		// Resetting other headers
+		this.headers.forEach(header => {
+			if (header.sortable !== column) {
+				header.direction = '';
+			}
+		});
+
+		this.service.sortColumn = column;
+		this.service.sortDirection = direction;
+	}
+
 	receiveUpdate($event) {
 		this.updateItem($event);
 	}
 
 	receiveDelete($event) {
-		this.deleteItem($event); // Event is a product
+		this.deleteItem($event);
 	}
 }
