@@ -47,7 +47,7 @@ class ProductServiceImplTest {
 		product.setModel("BX300");
 		product.setImage("www.sony.headset.image,com");
 		product.setQuantity(25);
-		product.setUnitPrice(new BigDecimal("89.99"));
+		product.setUnitPrice(10);
 		product.setColor("Black");
 		
 		Product product2 = new Product();
@@ -58,7 +58,7 @@ class ProductServiceImplTest {
 		product2.setModel("BX300");
 		product2.setImage("www.sony.headset.image,com");
 		product2.setQuantity(25);
-		product2.setUnitPrice(new BigDecimal("89.99"));
+		product2.setUnitPrice(10);
 		product2.setColor("Black");
 		
 		List<Product> pList = new ArrayList<>();
@@ -84,7 +84,7 @@ class ProductServiceImplTest {
 		product2.setModel("BX300");
 		product2.setImage("www.sony.headset.image,com");
 		product2.setQuantity(25);
-		product2.setUnitPrice(new BigDecimal("89.99"));
+		product2.setUnitPrice(10);
 		product2.setColor("Black");
 		
 		product2 = productService.createProduct(product2);
@@ -125,7 +125,7 @@ class ProductServiceImplTest {
 		product.setModel("BX300");
 		product.setImage("www.sony.headset.image,com");
 		product.setQuantity(25);
-		product.setUnitPrice(new BigDecimal("89.99"));
+		product.setUnitPrice(10);
 		product.setColor("Black");
 		
 		// Declare an argument captor
