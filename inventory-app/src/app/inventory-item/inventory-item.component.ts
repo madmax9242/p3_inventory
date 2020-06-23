@@ -12,6 +12,9 @@ import { InventoryService } from '../service/inventory.service';
 export class InventoryItemComponent implements OnInit {
 
 	@Input() product: Product;
+	@Input() userType: string;
+	admin: boolean = true;
+	localQuantity: number;
 
 	constructor(
 		private modalService: NgbModal,
@@ -20,10 +23,34 @@ export class InventoryItemComponent implements OnInit {
 		private inventoryService: InventoryService) {
 	}
 
-	ngOnInit(): void { }
+	ngOnInit(): void {
+		console.log(this.userType);
+		console.log(this.admin);
+
+		this.localQuantity = this.product.quantity;
+
+		if (this.userType === 'admin') {
+			this.admin = false;
+		}
+	}
+
+	reduceInventory() {
+		console.log("reduceInventory() called.");
+
+		this.product.quantity = this.localQuantity - this.product.quantity;
+
+		if (this.product.quantity > 0) {
+			this.updateItem();
+		} else {
+			this.modalService.dismissAll();
+			this.product.quantity = this.localQuantity;
+			alert("Insufficient inventory.");
+		}
+	}
 
 	updateItem() {
-		// TODO: BACKEND VALIDATION; MAKE SURE UPDATED FIELDS ARE VALID
+		console.log("updateItem() called.");
+
 		this.inventoryService
 			.updateProduct(this.product)
 			.subscribe((res) => {

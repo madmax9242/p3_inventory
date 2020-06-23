@@ -13,21 +13,21 @@ import { SortableDirective } from './directives/sortable.directive';
 import { DecimalPipe } from '@angular/common';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AdminviewComponent,
-    InventoryviewComponent,
-    InventoryItemComponent,
-    SortableDirective,
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    FormsModule,
-    NgbModule,
-  ],
-  providers: [HttpClientModule, DecimalPipe, NgbActiveModal],
-  bootstrap: [AppComponent],
+	declarations: [
+		AppComponent,
+		AdminviewComponent,
+		InventoryviewComponent,
+		InventoryItemComponent,
+		SortableDirective,
+	],
+	imports: [
+		BrowserModule,
+		HttpClientModule,
+		AppRoutingModule,
+		FormsModule,
+		NgbModule,
+	],
+	providers: [HttpClientModule, DecimalPipe, NgbActiveModal],
+	bootstrap: [AppComponent],
 })
 export class AppModule { }
