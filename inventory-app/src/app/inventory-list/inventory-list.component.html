@@ -9,7 +9,7 @@
 		<!-- PRODUCT SEARCH -->
 		<div class="form-group form-inline">
 			Product Search: <input class="form-control ml-2" type="text" name="searchTerm" [(ngModel)]="service.searchTerm" />
-			<span class="ml-3" *ngIf="service.loading$ | async">Loading...</span>
+			<span class="m-4" *ngIf="service.loading$ | async">Loading...</span>
 		</div>
 
 		<!-- TABLE -->
@@ -27,7 +27,7 @@
 					<th scope="col" sortable="brand" (sort)="onSort($event)">Brand</th>
 					<th scope="col" sortable="model" (sort)="onSort($event)">Model</th>
 					<th scope="col" sortable="category" (sort)="onSort($event)">Category</th>
-					<th scope="col" sortable="color" (sort)="onSort($event)">color</th>
+					<th scope="col" sortable="color" (sort)="onSort($event)">Color</th>
 					<th scope="col">Actions</th>
 				</tr>
 			</thead>
@@ -38,7 +38,7 @@
 						<ngb-highlight [result]="product.id" [term]="service.searchTerm"></ngb-highlight>
 					</td>
 					<td>
-						<img class="media-img rounded d-block mr-4 ml-4" src="{{product.image}}" alt="alt bc best practice">
+						<img class="media-img rounded d-block mr-4 ml-4" src="{{product.image}}" alt="product_img">
 					</td>
 					<td>
 						<ngb-highlight [result]="product.name" [term]="service.searchTerm"></ngb-highlight>

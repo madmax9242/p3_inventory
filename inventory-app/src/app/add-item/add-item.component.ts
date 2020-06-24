@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { InventoryService } from '../service/inventory.service';
 
 @Component({
-	selector: 'app-adminview',
-	templateUrl: './adminview.component.html',
-	styleUrls: ['./adminview.component.css']
+	selector: 'app-add-item',
+	templateUrl: './add-item.component.html',
+	styleUrls: ['./add-item.component.css']
 })
-export class AdminviewComponent implements OnInit {
+export class AddItemComponent implements OnInit {
 
 	product: Product;
 
@@ -19,13 +19,14 @@ export class AdminviewComponent implements OnInit {
 		this.product = new Product();
 	}
 
+	// Adds an item to inventory and route to inventory list
 	addItem() {
-		console.log("submitItem() called.");
+		console.log("addItem() called.");
 
 		console.log(this.product);
 
 		this.inventoryService.addProduct(this.product).subscribe(data => {
-			this.router.navigate(['/inventoryview'])
+			this.router.navigate(['/inventory-list'])
 		});
 	}
 }
