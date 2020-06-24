@@ -117,4 +117,5 @@ export class ServiceService {
 		products = products.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
 		return of({ products, total });
 	}
+
 }

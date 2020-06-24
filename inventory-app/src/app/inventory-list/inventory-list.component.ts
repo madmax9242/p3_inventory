@@ -10,11 +10,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryItemComponent } from '../inventory-item/inventory-item.component';
 
 @Component({
-	selector: 'app-inventoryview',
-	templateUrl: './inventoryview.component.html',
-	styleUrls: ['./inventoryview.component.css'],
+	selector: 'app-inventory-list',
+	templateUrl: './inventory-list.component.html',
+	styleUrls: ['./inventory-list.component.css'],
 })
-export class InventoryviewComponent implements OnInit {
+export class InventoryListComponent implements OnInit {
 
 	// Change application view (admin/customer)
 	userType: string = "admin";
@@ -24,12 +24,7 @@ export class InventoryviewComponent implements OnInit {
 
 	@ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
 
-	constructor(
-		private inventoryService: InventoryService,
-		private router: Router,
-		public service: ServiceService,
-		private modalService: NgbModal,
-	) {
+	constructor(private router: Router, private inventoryService: InventoryService, public service: ServiceService, private modalService: NgbModal) {
 		this.getAllProducts();
 	}
 

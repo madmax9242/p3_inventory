@@ -6,8 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
-import { AdminviewComponent } from './adminview/adminview.component';
-import { InventoryviewComponent } from './inventoryview/inventoryview.component';
+import { AddItemComponent } from './add-item/add-item.component';
+import { InventoryListComponent } from './inventory-list/inventory-list.component';
 import { InventoryItemComponent } from './inventory-item/inventory-item.component';
 import { SortableDirective } from './directives/sortable.directive';
 import { DecimalPipe } from '@angular/common';
@@ -15,8 +15,8 @@ import { DecimalPipe } from '@angular/common';
 @NgModule({
 	declarations: [
 		AppComponent,
-		AdminviewComponent,
-		InventoryviewComponent,
+		AddItemComponent,
+		InventoryListComponent,
 		InventoryItemComponent,
 		SortableDirective,
 	],

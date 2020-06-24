@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { InventoryService } from '../service/inventory.service';
 
 @Component({
-	selector: 'app-adminview',
-	templateUrl: './adminview.component.html',
-	styleUrls: ['./adminview.component.css']
+	selector: 'app-add-item',
+	templateUrl: './add-item.component.html',
+	styleUrls: ['./add-item.component.css']
 })
-export class AdminviewComponent implements OnInit {
+export class AddItemComponent implements OnInit {
 
 	product: Product;
 

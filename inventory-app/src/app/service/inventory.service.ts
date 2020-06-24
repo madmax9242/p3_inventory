@@ -35,4 +35,5 @@ export class InventoryService {
 	deleteProductById(id: number): Observable<Product> {
 		return this.http.delete<Product>(this.baseUrl + "product/" + id); // http://localhost:8989/product/{id}
 	}
+
 }
