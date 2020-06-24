@@ -19,13 +19,14 @@ export class AddItemComponent implements OnInit {
 		this.product = new Product();
 	}
 
+	// Adds an item to inventory and route to inventory list
 	addItem() {
-		console.log("submitItem() called.");
+		console.log("addItem() called.");
 
 		console.log(this.product);
 
 		this.inventoryService.addProduct(this.product).subscribe(data => {
-			this.router.navigate(['/inventoryview'])
+			this.router.navigate(['/inventory-list'])
 		});
 	}
 }
