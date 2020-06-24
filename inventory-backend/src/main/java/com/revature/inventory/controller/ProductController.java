@@ -2,7 +2,11 @@ package com.revature.inventory.controller;
 
 import com.revature.inventory.model.Product;
 import com.revature.inventory.service.ProductService;
+
+import javassist.NotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +20,7 @@ public class ProductController {
 
 
 	@GetMapping("/product/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
 	public Product getProductById(@PathVariable Long id) {
 		return productService.findProductById(id);
 	}
@@ -37,16 +42,19 @@ public class ProductController {
 	}
 
 	@PostMapping("/product")
+    @ResponseStatus(value = HttpStatus.CREATED)
 	public Product createProductById(@RequestBody Product product) {
 		return productService.createProduct(product);
 	}
 
 	@PutMapping("/product")
+    @ResponseStatus(value = HttpStatus.OK)
 	public Product updateProduct(@RequestBody Product product) {
 		return productService.updateProduct(product);
 	}
 
 	@DeleteMapping("/product/{id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
 	public void deleteProductById(@PathVariable Long id) {
 		productService.deleteProductById(id);
 	}
