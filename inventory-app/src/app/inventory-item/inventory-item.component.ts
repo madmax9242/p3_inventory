@@ -16,7 +16,11 @@ export class InventoryItemComponent implements OnInit {
 	admin: boolean = true;
 	localQuantity: number;
 
-	constructor(private modalService: NgbModal, public service: ServiceService, public activeModal: NgbActiveModal, private inventoryService: InventoryService) {
+	constructor(
+		private modalService: NgbModal,
+		public service: ServiceService,
+		public activeModal: NgbActiveModal,
+		private inventoryService: InventoryService) {
 	}
 
 	ngOnInit(): void {

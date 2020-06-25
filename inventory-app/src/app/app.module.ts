@@ -11,6 +11,7 @@ import { InventoryListComponent } from './inventory-list/inventory-list.componen
 import { InventoryItemComponent } from './inventory-item/inventory-item.component';
 import { SortableDirective } from './directives/sortable.directive';
 import { DecimalPipe } from '@angular/common';
+import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 
 @NgModule({
 	declarations: [
@@ -19,6 +20,7 @@ import { DecimalPipe } from '@angular/common';
 		InventoryListComponent,
 		InventoryItemComponent,
 		SortableDirective,
+		ConfirmationModalComponent,
 	],
 	imports: [
 		BrowserModule,
