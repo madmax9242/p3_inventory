@@ -11,6 +11,7 @@ import { InventoryService } from '../service/inventory.service';
 })
 export class AddItemComponent implements OnInit {
 
+	userType: string = 'customer';
 	product: Product;
 
 	constructor(private http: HttpClient, private router: Router, private inventoryService: InventoryService) { }

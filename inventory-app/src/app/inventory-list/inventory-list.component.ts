@@ -8,6 +8,7 @@ import { ServiceService } from '../service/service.service';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryItemComponent } from '../inventory-item/inventory-item.component';
+import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 
 @Component({
 	selector: 'app-inventory-list',
@@ -17,14 +18,18 @@ import { InventoryItemComponent } from '../inventory-item/inventory-item.compone
 export class InventoryListComponent implements OnInit {
 
 	// Change application view (admin/customer)
-	userType: string = "admin";
+	userType: string = "customer";
 
 	products$: Observable<Product[]>;
 	total$: Observable<number>;
 
 	@ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
 
-	constructor(private router: Router, private inventoryService: InventoryService, public service: ServiceService, private modalService: NgbModal) {
+	constructor(
+		private router: Router,
+		private inventoryService: InventoryService,
+		public service: ServiceService,
+		private modalService: NgbModal) {
 		this.getAllProducts();
 	}
 
@@ -33,50 +38,31 @@ export class InventoryListComponent implements OnInit {
 
 	// FOR ADMIN
 	open(product) {
-		console.log("open() called.");
-
 		const modalRef = this.modalService.open(InventoryItemComponent);
 		modalRef.componentInstance.product = product;
-
 		modalRef.componentInstance.userType = this.userType;
-
 	}
 
 	// FOR CUSTOMER
 	addToCart(product) {
 		console.log("addToCart() called.");
 		console.log(product);
-
 		// TODO: ADD TO CART, SOMEHOW
 	}
 
 	updateItem(product: Product) {
 		console.log("updateItem() called.");
-
 		console.log(product);
 	}
 
 	deleteItem(product: Product) {
-		console.log("deleteItem() called.");
-
-		this.inventoryService
-			.deleteProductById(product.id)
-			.subscribe((result) => {
-				if (!result) {
-					this.getAllProducts();
-				} else {
-					console.log('show something');
-				}
-
-			});
+		const modalRef = this.modalService.open(ConfirmationModalComponent);
+		modalRef.componentInstance.product = product;
 	}
 
 	getAllProducts() {
-		console.log("getAllProducts() called.");
-
 		this.inventoryService.getAllProducts()
 			.subscribe(result => {
-				console.log(result);
 				this.service.setInventory(result);
 				this.products$ = this.service.products$;
 				this.total$ = this.service.total$;
