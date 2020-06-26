@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-
-import { AddItemComponent } from './add-item/add-item.component';
-import { InventoryListComponent } from './inventory-list/inventory-list.component';
+import { AddItemComponent } from './app-inventory/components/add-item/add-item.component';
+import { InventoryListComponent } from './app-inventory/components/inventory-list/inventory-list.component';
 
 const routes: Routes = [
 	{ path: 'add-item', component: AddItemComponent },

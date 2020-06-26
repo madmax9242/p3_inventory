@@ -42,7 +42,7 @@ function matches(product: Product, term: string, pipe: PipeTransform) {
 @Injectable({
 	providedIn: 'root'
 })
-export class ServiceService {
+export class SortService {
 
 	private _loading$ = new BehaviorSubject<boolean>(true);
 	private _search$ = new Subject<void>();

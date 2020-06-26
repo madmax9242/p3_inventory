@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../class/product/product';
+import { Product } from '../../class/product/product';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { InventoryService } from '../service/inventory.service';
+import { InventoryService } from '../../service/inventory.service';
+import { environment } from "../../../../environments/environment";
 
 @Component({
 	selector: 'app-add-item',
@@ -18,6 +19,7 @@ export class AddItemComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.product = new Product();
+		this.userType = environment.admin ? 'admin' : 'customer';
 	}
 
 	// Adds an item to inventory and route to inventory list

@@ -1,4 +1,4 @@
-<ng-container *ngIf="userType === 'admin'">
+<div *ngIf="userType === 'admin'">
 	<div class="container col-12 col-md-8 md-auto shadow my-4 p-4">
 		<p class="display-4 text-center addItemTitle">Add Product</p>
 		<form #f="ngForm" (submit)="addItem()">
@@ -67,7 +67,7 @@
 
 		</form>
 	</div>
-</ng-container>
-<ng-container *ngIf="userType === 'customer'">
+</div>
+<div *ngIf="userType === 'customer'">
 	<h1>Hey! You're lost in this page. This is not accessible to you.</h1>
-</ng-container>
+</div>

@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from '../class/product/product';
+import { Product } from '../../class/product/product';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { InventoryService } from '../service/inventory.service';
-import { ServiceService } from '../service/service.service';
+import { InventoryService } from '../../service/inventory.service';
+import { SortService } from '../../service/sort.service';
 
 @Component({
   selector: 'app-confirmation-modal',
@@ -18,7 +18,7 @@ export class ConfirmationModalComponent implements OnInit {
     private modalService: NgbModal,
     public activeModal: NgbActiveModal,
     public inventoryService: InventoryService,
-    private service: ServiceService,
+    private service: SortService,
   ) { }
 
   ngOnInit(): void {
