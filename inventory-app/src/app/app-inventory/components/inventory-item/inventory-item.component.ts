@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Product } from '../class/product/product';
+import { Product } from '../../class/product/product';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ServiceService } from '../service/service.service';
-import { InventoryService } from '../service/inventory.service';
+import { SortService } from '../../service/sort.service';
+import { InventoryService } from '../../service/inventory.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
 	selector: 'app-inventory-item',
@@ -18,7 +19,7 @@ export class InventoryItemComponent implements OnInit {
 
 	constructor(
 		private modalService: NgbModal,
-		public service: ServiceService,
+		public service: SortService,
 		public activeModal: NgbActiveModal,
 		private inventoryService: InventoryService) {
 	}

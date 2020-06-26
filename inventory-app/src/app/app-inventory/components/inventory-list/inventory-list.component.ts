@@ -1,14 +1,15 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { Product } from '../class/product/product';
-import { InventoryService } from '../service/inventory.service';
+import { Product } from '../../class/product/product';
+import { InventoryService } from '../../service/inventory.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { SortableDirective, SortEvent } from '../directives/sortable.directive';
-import { ServiceService } from '../service/service.service';
+import { SortableDirective, SortEvent } from '../../directives/sortable.directive';
+import { SortService } from '../../service/sort.service';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { InventoryItemComponent } from '../inventory-item/inventory-item.component';
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'app-inventory-list',
@@ -18,7 +19,7 @@ import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-m
 export class InventoryListComponent implements OnInit {
 
 	// Change application view (admin/customer)
-	userType: string = "customer";
+	userType: string = "admin";
 
 	products$: Observable<Product[]>;
 	total$: Observable<number>;
@@ -28,12 +29,13 @@ export class InventoryListComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private inventoryService: InventoryService,
-		public service: ServiceService,
+		public service: SortService,
 		private modalService: NgbModal) {
 		this.getAllProducts();
 	}
 
 	ngOnInit(): void {
+		this.userType = environment.admin ? 'admin' : 'customer';
 	}
 
 	// FOR ADMIN
