@@ -8,3 +8,7 @@
     background-color: #F26925 !important;
     border-color: #F26925 !important;
 }
+.text-sm{
+    font-size: 12px;
+    margin-top: 3px;
+}

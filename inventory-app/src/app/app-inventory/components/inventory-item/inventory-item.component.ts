@@ -3,7 +3,7 @@ import { Product } from '../../class/product/product';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SortService } from '../../service/sort.service';
 import { InventoryService } from '../../service/inventory.service';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'app-inventory-item',
@@ -17,6 +17,15 @@ export class InventoryItemComponent implements OnInit {
 	admin: boolean = true;
 	localQuantity: number;
 
+	nProduct: Product = new Product();
+
+	updateProduct: FormGroup;
+
+	get name() { return this.updateProduct.get('name') }
+	get image() { return this.updateProduct.get('image') }
+	get quantity() { return this.updateProduct.get('quantity') }
+	get unitPrice() { return this.updateProduct.get('unitPrice') }
+
 	constructor(
 		private modalService: NgbModal,
 		public service: SortService,
@@ -25,21 +34,27 @@ export class InventoryItemComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log(this.userType);
-		console.log(this.admin);
-
 		this.localQuantity = this.product.quantity;
-
 		if (this.userType === 'admin') {
 			this.admin = false;
 		}
+
+		this.updateProduct = new FormGroup({
+			id: new FormControl(this.product.id),
+			name: new FormControl({ value: this.product.name, disabled: this.admin }, [Validators.required]),
+			brand: new FormControl({ value: this.product.brand, disabled: this.admin }),
+			description: new FormControl({ value: this.product.description, disabled: this.admin }),
+			model: new FormControl({ value: this.product.model, disabled: this.admin }),
+			category: new FormControl({ value: this.product.category, disabled: this.admin }),
+			image: new FormControl({ value: this.product.image, disabled: this.admin }),
+			quantity: new FormControl(this.product.quantity, [Validators.required]),
+			unitPrice: new FormControl({ value: this.product.unitPrice, disabled: this.admin }, [Validators.required]),
+			color: new FormControl({ value: this.product.color, disabled: this.admin }),
+		});
 	}
 
 	reduceInventory() {
-		console.log("reduceInventory() called.");
-
 		this.product.quantity = this.localQuantity - this.product.quantity;
-
 		if (this.product.quantity > 0) {
 			this.updateItem();
 		} else {
@@ -50,19 +65,22 @@ export class InventoryItemComponent implements OnInit {
 	}
 
 	updateItem() {
-		console.log("updateItem() called.");
+		if (this.updateProduct.valid) {
+			this.inventoryService
+				.updateProduct(this.updateProduct.value)
+				.subscribe((res) => {
+					if (res) {
+						this.inventoryService.getAllProducts()
+							.subscribe(inventory => {
+								this.service.setInventory(inventory);
+								this.modalService.dismissAll();
+							})
+					}
+				});
+		} else {
+			alert("Update Invalid.");
+		}
 
-		this.inventoryService
-			.updateProduct(this.product)
-			.subscribe((res) => {
-				if (res) {
-					this.inventoryService.getAllProducts()
-						.subscribe(inventory => {
-							this.service.setInventory(inventory);
-							this.modalService.dismissAll();
-						})
-				}
-			});
 	}
 
 	private getDismissReason(reason: any): string {

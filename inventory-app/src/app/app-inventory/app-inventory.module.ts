@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { inventoryRoutes } from "../app-inventory/app-inventory.routes";
 
@@ -32,8 +32,9 @@ import { AppRoutingModule } from '../app-routing.module';
     RouterModule.forChild(inventoryRoutes),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [HttpClientModule, DecimalPipe, NgbActiveModal],
+  providers: [ReactiveFormsModule, HttpClientModule, DecimalPipe, NgbActiveModal],
   exports: [
     AddItemComponent,
     InventoryListComponent,
