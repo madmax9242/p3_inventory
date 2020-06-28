@@ -4,6 +4,7 @@ import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-
 import { SortService } from '../../service/sort.service';
 import { InventoryService } from '../../service/inventory.service';
 import { NgForm, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ShareItemService } from '../../service/share-item.service';
 
 @Component({
 	selector: 'app-inventory-item',
@@ -30,7 +31,8 @@ export class InventoryItemComponent implements OnInit {
 		private modalService: NgbModal,
 		public service: SortService,
 		public activeModal: NgbActiveModal,
-		private inventoryService: InventoryService) {
+		private inventoryService: InventoryService,
+		private shareItem: ShareItemService) {
 	}
 
 	ngOnInit(): void {
@@ -54,14 +56,36 @@ export class InventoryItemComponent implements OnInit {
 	}
 
 	reduceInventory() {
-		this.product.quantity = this.localQuantity - this.product.quantity;
-		if (this.product.quantity > 0) {
-			this.updateItem();
+		let reduce = this.localQuantity - this.quantity.value;
+		if (reduce >= 0) {
+			this.nProduct = this.setUpProductToShare();
+			this.shareItem.addToCart(this.nProduct);
+			this.callShare();
+			this.modalService.dismissAll();
 		} else {
 			this.modalService.dismissAll();
 			this.product.quantity = this.localQuantity;
 			alert("Insufficient inventory.");
 		}
+	}
+
+	setUpProductToShare(): Product {
+		return {
+			id: this.updateProduct.get('id').value,
+			name: this.updateProduct.get('name').value,
+			description: this.updateProduct.get('description').value,
+			brand: this.updateProduct.get('brand').value,
+			model: this.updateProduct.get('model').value,
+			category: this.updateProduct.get('category').value,
+			image: this.updateProduct.get('image').value,
+			quantity: this.updateProduct.get('quantity').value,
+			unitPrice: this.updateProduct.get('unitPrice').value,
+			color: this.updateProduct.get('color').value
+		}
+	}
+
+	callShare() {
+		this.shareItem.shareItems.subscribe(res => console.log(res));
 	}
 
 	updateItem() {
