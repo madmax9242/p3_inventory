@@ -3,10 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  urlInventory: 'http://localhost:8989/',
-  // urlInventory: 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10003/',
-  admin: false,
+	production: false,
+	urlInventory: 'http://localhost:8989/',
+	// urlInventory: 'http://ec2-34-203-75-254.compute-1.amazonaws.com:10003/',
+	admin: true,
 };
 
 /*
