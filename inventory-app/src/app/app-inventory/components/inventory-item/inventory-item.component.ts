@@ -19,6 +19,7 @@ export class InventoryItemComponent implements OnInit {
 	localQuantity: number;
 
 	nProduct: Product = new Product();
+	negativeQ: boolean = false;
 
 	updateProduct: FormGroup;
 
@@ -63,9 +64,10 @@ export class InventoryItemComponent implements OnInit {
 			this.callShare();
 			this.modalService.dismissAll();
 		} else {
-			this.modalService.dismissAll();
-			this.product.quantity = this.localQuantity;
-			alert("Insufficient inventory.");
+			// this.modalService.dismissAll();
+			this.quantity.setValue(this.localQuantity);
+			this.negativeQ = true;
+			// alert("Insufficient inventory.");
 		}
 	}
 
