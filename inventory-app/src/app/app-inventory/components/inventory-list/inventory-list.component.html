@@ -14,7 +14,7 @@
 			<thead class="thead-dark">
 				<tr>
 					<th scope="col">#</th>
-					<th scope="col" sortable="id" (sort)="onSort($event)">ID</th>
+					<th scope="col" sortable="id" (sort)="onSort($event)" *ngIf="userType === 'admin'">ID</th>
 					<th scope="col">Image</th>
 					<th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
 					<th scope="col" sortable="description" (sort)="onSort($event)">Description</th>
@@ -30,7 +30,7 @@
 			<tbody>
 				<tr *ngFor="let product of products$ | async; let idx = index">
 					<th scope="row">{{ idx+1 }}</th>
-					<td>
+					<td *ngIf="userType === 'admin'">
 						<ngb-highlight [result]="product.id" [term]="service.searchTerm"></ngb-highlight>
 					</td>
 					<td>
@@ -66,7 +66,7 @@
 					<!-- BUTTONS -->
 					<td>
 						<!-- SHOW IF ADMIN -->
-						<ng-container *ngIf="userType === 'admin'">
+						<div *ngIf="userType === 'admin'">
 							<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
 								<div class="btn-group mr-2 mb-2" role="group" aria-label="First group">
 									<button class="btn btn-outline-orange" (click)="open(product)">Update
@@ -80,13 +80,13 @@
 									</button>
 								</div>
 							</div>
-						</ng-container>
+						</div>
 						<!-- SHOW IF CUSTOMER -->
-						<ng-container *ngIf="userType === 'customer'">
+						<div *ngIf="userType === 'customer'">
 							<button class="btn btn-outline-orange" (click)="open(product)">Detail
 								<em class="fas fa-cart-plus"></em>
 							</button>
-						</ng-container>
+						</div>
 					</td>
 				</tr>
 			</tbody>
