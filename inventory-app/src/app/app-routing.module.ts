@@ -5,7 +5,7 @@ import { AddItemComponent } from './app-inventory/components/add-item/add-item.c
 import { InventoryListComponent } from './app-inventory/components/inventory-list/inventory-list.component';
 
 const routes: Routes = [
-	{ path: 'add-item', component: AddItemComponent },
+	{ path: 'inventory-add', component: AddItemComponent },
 	{ path: 'inventory-list', component: InventoryListComponent }
 ];
 

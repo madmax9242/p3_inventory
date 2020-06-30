@@ -17,8 +17,6 @@ exports.config = {
 	},
 	directConnect: true,
 	baseUrl: 'http://localhost:4200/',
-	addItemUrl: 'http://localhost:4200/add-item',
-	inventoryListUrl: 'http://localhost:4200/inventory-list',
 	framework: 'jasmine',
 	jasmineNodeOpts: {
 		showColors: true,
